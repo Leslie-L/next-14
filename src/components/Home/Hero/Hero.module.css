@@ -14,3 +14,7 @@
     margin: 0 0 3rem 0;
     text-align: center;
   }
+  @media (width <= 600px) {
+    .Hero > h1 {
+    font-size: 3rem;}
+  }
