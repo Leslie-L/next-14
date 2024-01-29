@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import Link from "next/link";
+import { Roboto } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/shared/Header";
 
-const inter = Inter({ subsets: ["latin"] });
+const roboto = Roboto({ 
+  weight:["300","700","900"],
+  subsets: ["latin"] 
+});
 
 export const metadata: Metadata = {
   title: "Future Store",
@@ -19,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
      
-      <body className={inter.className}>
+      <body className={roboto.className}>
         <Header/>
         {children}</body>
     </html>
