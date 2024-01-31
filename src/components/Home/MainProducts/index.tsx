@@ -1,15 +1,6 @@
-import Image from 'next/image';
 import styles from './MainProducts.module.css'
 import Item from './Item';
-const getProducts =async ()=>{
-  const src =  await fetch("https://"+process.env.SHOPIFY_HOSTNAME+'/admin/api/2024-01/products.json',{
-    headers:{
-      'X-Shopify-Access-Token':process.env.SHOPYFY_APY_KEY||""
-    }
-  })
-  const data =  await src.json()
-  return data.products;
-}
+import { getProducts } from '@/services/shopify/indext';
 
 const MainProducts= async ()=> {
   const data = await getProducts();
