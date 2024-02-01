@@ -9,6 +9,7 @@ export const getProducts =async ()=>{
             }
           })
           const data =  await src.json()
+          console.log(src.status)
           return data.products;
     } catch (error) {
         console.log(error)

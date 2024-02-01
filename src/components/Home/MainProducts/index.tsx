@@ -1,10 +1,12 @@
 import styles from './MainProducts.module.css'
 import Item from './Item';
-import { getProducts } from '@/services/shopify/indext';
+import { getProducts } from '@/services/shopify';
+
 
 const MainProducts= async ()=> {
   const data = await getProducts();
   console.log(data)
+  if(data)
     return(
       <section className={styles.Main_products}>
         <h3>✨ New products released!</h3>
@@ -20,5 +22,8 @@ const MainProducts= async ()=> {
         </div>
       </section>
     )
+    return(<div>
+      Error
+    </div>)
   }
 export default MainProducts;
