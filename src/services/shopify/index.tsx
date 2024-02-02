@@ -1,16 +1,30 @@
 import { env } from "@/config/env";
 import { shopifyUrls } from "./urls";
 
-export const getProducts =async ()=>{
+export const getProducts =async (id?:string):Promise<ProductType[]>=>{
     try {
-        const src =  await fetch(shopifyUrls.products.all,{
+      const apiUrl = id ? `${shopifyUrls.products.all}?ids=${id}` : shopifyUrls.products.all
+      const src =  await fetch(apiUrl,{
             headers:{
               'X-Shopify-Access-Token':env.SHOPYFY_APY_KEY
             }
           })
-          const data =  await src.json()
-          console.log(src.status)
-          return data.products;
+          const { products } = await src.json()
+
+          const transformedProducts = products.map((product: any) => {
+            return {
+              id: product.id,
+              gql_id: product.variants[0].admin_graphql_api_id,
+              title: product.title,
+              description: product.body_html,
+              price: product.variants[0].price,
+              image: product.images[0].src,
+              quantity: product.variants[0].inventory_quantity,
+              handle: product.handle,
+              tags: product.tags,
+            }
+          })
+          return transformedProducts
     } catch (error) {
         console.log(error)
     }
