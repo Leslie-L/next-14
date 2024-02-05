@@ -13,7 +13,7 @@ const MainProducts= async ()=> {
         <div className={styles.MainProducts_grid}> 
         {
           data.map((item)=>{
-            const imageSrc = item.images[0].src;
+            const imageSrc = item.image;
             return(
               <Item key={item.id} item={item} imageSrc={imageSrc}/>
             );
