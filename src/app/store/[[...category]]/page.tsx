@@ -15,12 +15,12 @@ export default async function Category(props: CategoryProps) {
   const collections = await getCollections()
   const categories  = category
   if (categories?.length > 0) {
-    const selectedCollectionId = collections.find((collection) => collection.handle === categories[0]).id
-    products = await getCollectionProducts(selectedCollectionId)
+    
+    products = await getCollectionProducts(categories[0])
   }else {
     products = await getProducts()
   }
-
+  console.log('products category',products)
   return (
     <ProductsWrepper products={products} />
   )

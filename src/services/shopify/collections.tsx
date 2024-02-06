@@ -3,33 +3,22 @@ import { shopifyUrls } from "./urls"
 
 export const getCollections = async () => {
   try {
-    const response = await fetch(shopifyUrls.collections.all, {
-      headers: new Headers({
-        'X-Shopify-Access-Token': env.SHOPYFY_APY_KEY
-      })
-    })
-    const { smart_collections } = await response.json()
-    const transformedCollections = smart_collections.map((collection: any) => {
-      return {
-        id: collection.id,
-        title: collection.title,
-        handle: collection.handle
-      }
-    })
-    return transformedCollections
+    const response = await fetch(shopifyUrls.collections.all)
+    const { collection } = await response.json()
+    
+    return collection
   } catch (error) {
     console.log(error)
   }
 }
-export const getCollectionProducts = async (id: string) => {
+export const getCollectionProducts = async (idSelected: string) => {
   try {
-    const response = await fetch(shopifyUrls.collections.products(id), {
-      headers: new Headers({
-        'X-Shopify-Access-Token': env.SHOPYFY_APY_KEY
-      })
-    })
-    const { products } = await response.json()
-    return products
+    console.log('id',idSelected)
+    const response = await fetch(shopifyUrls.products.all);
+    const {products} = await response.json();
+    const resProds = products.filter((item)=>item.handlec===idSelected)
+    return resProds;
+    
   } catch (error) {
     console.log(error)
   }
