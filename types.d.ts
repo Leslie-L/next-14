@@ -20,6 +20,7 @@ interface ErrorPageProps {
     price: number;
     quantity: number;
     id: string;
-    image: string;
-    merchandiseId: string;
+    image?: string;
+    merchandiseId?: string;
   }
+  
