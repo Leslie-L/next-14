@@ -22,7 +22,7 @@ export default async function createUserEmail(user) {
         return {token,date}
         
     } catch (error) {
-        console.log(error)
+       
         return null
     }
     

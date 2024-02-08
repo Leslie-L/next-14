@@ -5,8 +5,10 @@ import { ShoppingCart } from "./ShoppingCart"
 import { validateAccessToken } from "@/app/utils/validateToken";
 import Logout from "./Logout";
 
-export default function Header() {
-  const isLogged =  validateAccessToken()
+ const Header = async () => {
+  
+  const props =  await validateAccessToken();
+  const isLogged = props? props.logged: null;
     return(
         <header>
         <nav className={styles.nav}>
@@ -34,4 +36,4 @@ export default function Header() {
 }
 
   
-
+export default Header;

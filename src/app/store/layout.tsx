@@ -4,7 +4,7 @@ import styles from './layout.module.css'
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
   const collections = await getCollections()
-  console.log('Collections',collections)
+  
   return (
     <main>
       <nav className={styles.navbar}>

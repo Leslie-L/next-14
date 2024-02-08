@@ -2,7 +2,7 @@
 import { handleLogOut } from '@/actions'
 import styles from '../Header.module.css'
 export default function Logout() {
-    const handleAction = async (event) => {
+    const handleAction = async () => {
         
         await handleLogOut();
       }

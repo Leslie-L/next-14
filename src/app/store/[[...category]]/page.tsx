@@ -20,7 +20,7 @@ export default async function Category(props: CategoryProps) {
   }else {
     products = await getProducts()
   }
-  console.log('products category',products)
+  
   return (
     <ProductsWrepper products={products} />
   )
