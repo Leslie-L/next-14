@@ -25,4 +25,30 @@
     height: 1.25rem;
     fill: white;
 }
-    
+.ShoppingCart__items{
+    position: absolute;
+    background: black;
+    border: 1px solid white;
+    border-radius: 8px;
+    right: 0;
+    max-width: 320px;
+    min-width: 250px;
+    padding: 1rem;
+}
+.ShoppingCart__items_item{
+    text-align: left;
+    border-bottom: 1px solid rgb(144, 153, 227);
+    padding: 2px;
+
+}
+.ShoppingCart__buyButton{
+    margin-top: 5px;
+    background: #ff4980;
+    color: white;
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 8px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+}
