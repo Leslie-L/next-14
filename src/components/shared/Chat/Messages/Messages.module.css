@@ -3,7 +3,6 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    background-color: black;
 }
   
 .chat_section{
@@ -13,10 +12,20 @@
     scrollbar-width: 3px;
     scrollbar-color:  #ff4980 black;
     scrollbar-width: thin;
+    display: flex;
+    flex-direction: column;
 }
     
+
 .chat_message{
+    width: fit-content;
     margin-bottom: 1rem;
+    border-radius: 5px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    margin: 5px;
 }
        
 .chat_form{
@@ -29,6 +38,7 @@
     padding: 0.5rem;
     color: white;
     border: none;
+    flex-grow: 1;
     
 }
       
@@ -36,5 +46,5 @@
     padding: 10px;
     background-color: #ff4980;
     border: none;
-    border-radius: 0.375rem;
+    
 }

@@ -7,11 +7,12 @@ import {Messages} from './Messages'
 export default function Chat(){
     const [isClosed,setIsClosed]= useState(false)
     const handleClose = ()=>setIsClosed(!isClosed)
+    const render = isClosed ?   {}:{display:'none'};
     return(
         <>
-            {
-                isClosed && 
-                <div className={styles.chat}>
+            
+               
+                <div className={styles.chat} style={render}>
                     <div className={styles.chat__minimize}>
                         <button onClick={handleClose}>
                             <FaWindowMinimize />
@@ -19,7 +20,7 @@ export default function Chat(){
                     </div>
                     <Messages/>
                 </div>
-            }
+            
             {
                 !isClosed &&
                 <button className={styles.button} onClick={handleClose}>
