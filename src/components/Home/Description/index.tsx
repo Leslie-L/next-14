@@ -5,7 +5,7 @@ const dataUrl ='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST
 export default function Description() {
     return(
       <section className={styles.description}>
-        <h2 className={styles.title}>Productos</h2>
+        
         <div className={styles.description_container}>
           <div className={styles.description_container__img} >
           <Image 
@@ -17,8 +17,8 @@ export default function Description() {
            />
           </div>
           <p className={styles.description_container__paragraph}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo provident aspernatur iusto quaerat voluptatibus sint commodi quo et. Corrupti omnis nesciunt cupiditate ex illum, fuga velit reprehenderit unde praesentium facere.
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+          <h2 className={styles.title}>Products</h2>
+          Future World: Your Gateway to Tomorrow's Tech! Dive into a world of cutting-edge gadgets and gear. Stay ahead of the curve and redefine your digital lifestyle with us.
           </p>
         </div>
       </section>
