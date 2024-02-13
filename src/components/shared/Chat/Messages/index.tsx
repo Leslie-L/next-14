@@ -2,9 +2,31 @@
  
 import { useChat } from 'ai/react';
 import styles from "./Messages.module.css"
-export const Messages = () => {
-  const { messages, input, handleInputChange, handleSubmit } = useChat();
- 
+import { useEffect,useCallback } from 'react';
+
+
+export const Messages = (props: { agent: string }) => {
+  
+  const { messages, input, handleInputChange, handleSubmit,append } = useChat();
+  
+  const appendCallback = useCallback(
+    async () => {
+      await append({
+        id: '1',
+        content: props.agent,
+        role: 'user'
+      });
+    },
+    [append, props.agent]
+  );
+
+  useEffect(() => {
+    const firstContext = async () => {
+      await appendCallback();
+    };
+
+    firstContext();
+  }, [appendCallback]);
  const clientClass ={
      backgroundColor: '#4f56ff',
      alignSelf: 'flex-end',
@@ -15,7 +37,8 @@ export const Messages = () => {
   return (
     <main className={styles.chat}>
       <section className={styles.chat_section}>
-        {messages.map(m =>{
+        {messages
+        .map(m =>{
           const role = m.role === 'user' ? 'User ' : 'AI ';
           const classMess = m.role === 'user'?clientClass:aiClass;
           return (
