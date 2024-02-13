@@ -38,8 +38,9 @@ export const Messages = (props: { agent: string }) => {
     <main className={styles.chat}>
       <section className={styles.chat_section}>
         {messages
+        .filter((val,index)=>index>=2)
         .map(m =>{
-          const role = m.role === 'user' ? 'User ' : 'AI ';
+          const role = m.role === 'user' ? 'User ' : 'Assistente ';
           const classMess = m.role === 'user'?clientClass:aiClass;
           return (
             <div className={styles.chat_message} style={classMess} key={m.id}>
