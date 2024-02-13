@@ -1,5 +1,9 @@
 import Image from 'next/image';
-export default function Item({item,imageSrc}){
+type propType={
+  item: ProductType;
+  imageSrc:string;
+}
+export default function Item({item,imageSrc}:propType){
     return(
         <article >
                 <p>{item.title}</p>

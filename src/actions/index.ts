@@ -8,7 +8,7 @@ import { cookies } from 'next/headers'
 import { redirect } from "next/navigation";
 
 
-export const  handleCreateUser= async (formData)=>{
+export const  handleCreateUser= async (formData:FormData)=>{
     const form = Object.fromEntries(formData)
     const session = await createUserEmail(form);
     const cookiesStore = cookies()

@@ -2,17 +2,25 @@
  
 import { useChat } from 'ai/react';
 import styles from "./Messages.module.css"
-import { useEffect,useCallback } from 'react';
+import { useEffect,useCallback, useState } from 'react';
 
+
+const uniqueId = () => {
+  const dateString = Date.now().toString(36);
+  const randomness = Math.random().toString(36).substr(2);
+  return dateString + randomness;
+};
 
 export const Messages = (props: { agent: string }) => {
   
-  const { messages, input, handleInputChange, handleSubmit,append } = useChat();
+  const { messages, input, handleInputChange, handleSubmit,append,isLoading } = useChat();
   
   const appendCallback = useCallback(
     async () => {
+      
+      const id = uniqueId()
       await append({
-        id: '1',
+        id: id,
         content: props.agent,
         role: 'user'
       });
@@ -24,7 +32,6 @@ export const Messages = (props: { agent: string }) => {
     const firstContext = async () => {
       await appendCallback();
     };
-
     firstContext();
   }, [appendCallback]);
  const clientClass ={
@@ -54,6 +61,7 @@ export const Messages = (props: { agent: string }) => {
       </section>
       <form className={styles.chat_form} onSubmit={handleSubmit}>
         <input
+          disabled={isLoading}
           value={input}
           onChange={handleInputChange}
           placeholder="Preguntale al asistente"

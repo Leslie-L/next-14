@@ -3,7 +3,7 @@ import Link from "next/link"
 import styles from './layout.module.css'
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
-  const collections = await getCollections()
+  const collections:ProductType[] = await getCollections()
   
   return (
     <main>

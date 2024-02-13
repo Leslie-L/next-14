@@ -1,10 +1,11 @@
 "use client"
 import { handleLogin } from "@/actions";
 import styles from "./LoginForm.module.css";
+import { FormEvent } from "react";
 
 export default function LoginPage()  {
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event:any) => {
     const formData = new FormData(event.target);
     event.preventDefault();
     await handleLogin(formData);

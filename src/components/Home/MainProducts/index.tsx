@@ -5,7 +5,7 @@ import { getProducts } from '@/services/shopify';
 
 const MainProducts= async ()=> {
   const data = await getProducts();
-  console.log(data)
+
   if(data)
     return(
       <section className={styles.Main_products}>

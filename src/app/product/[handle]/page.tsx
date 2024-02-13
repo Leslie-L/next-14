@@ -12,7 +12,7 @@ export async function generateMetadata({ searchParams }: ProductPageProps) {
   const id = searchParams.id
   const product = await getProduct(id)
  
-
+  if(product)
   return {
     title: product.title,
     description: product.description,
@@ -29,6 +29,6 @@ export default async function ProductPage({ searchParams }: ProductPageProps) {
      if(!id){
         redirect('/store')
      }
-
+     if(product)
     return <ProductViwe product={product} />
   }

@@ -13,10 +13,10 @@ export const getCollections = async () => {
 }
 export const getCollectionProducts = async (idSelected: string) => {
   try {
-    console.log('id',idSelected)
+    
     const response = await fetch(shopifyUrls.products.all);
     const {products} = await response.json();
-    const resProds = products.filter((item)=>item.handlec===idSelected)
+    const resProds = products.filter((item:products)=>item.handlec===idSelected)
     return resProds;
     
   } catch (error) {

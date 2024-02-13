@@ -8,14 +8,15 @@ export const getProducts =async (id?:string):Promise<ProductType[]>=>{
       return products;
     } catch (error) {
         console.log(error)
+        return [];
     }
   }
-  export const getProduct =async (id:string):Promise<ProductType>=>{
+  export const getProduct =async (id:string):Promise<ProductType|undefined>=>{
     try {
       const src =  await fetch(shopifyUrls.products.all)
       const { products } = await src.json()
       
-      const transformed = products.find((item)=>item.id == id)
+      const transformed = products.find((item:ProductType)=>item.id == id)
       return transformed
     } catch (error) {
         console.log(error)

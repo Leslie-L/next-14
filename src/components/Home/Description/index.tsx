@@ -17,8 +17,7 @@ export default function Description() {
            />
           </div>
           <p className={styles.description_container__paragraph}>
-          <p className={styles.title}>Products</p>
-          Future World: Your Gateway to Tomorrow's Tech! Dive into a world of cutting-edge gadgets and gear. Stay ahead of the curve and redefine your digital lifestyle with us.
+          Future World: Your Gateway to Tomorrow&apos;s Tech! Dive into a world of cutting-edge gadgets and gear. Stay ahead of the curve and redefine your digital lifestyle with us.
           </p>
         </div>
       </section>

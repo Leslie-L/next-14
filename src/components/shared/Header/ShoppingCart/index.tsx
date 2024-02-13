@@ -8,7 +8,7 @@ export const ShoppingCart = () => {
   const { cart } = useShoppingCart();
   const [isOpen, setIsOpen] = useState(false);
   const handleOpen = () => setIsOpen(!isOpen);
-  console.log(cart)
+  
   const total = cart.reduce((prev,current)=>current.quantity+prev,0)
   return (
     <button className={styles.ShoppingCart} onClick={handleOpen}>

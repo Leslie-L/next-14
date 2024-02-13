@@ -3,7 +3,7 @@ import { adminSDK } from './configAdmin';
 
 export default async function checkUserAuth() {
     const cookiesStore = cookies()
-    const cookie  =cookiesStore.get('accessToken')?.value
+    const cookie  =cookiesStore.get('accessToken')?.value ||""
    
 
     
