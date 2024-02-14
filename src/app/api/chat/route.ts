@@ -32,7 +32,6 @@ export async function POST(req: Request) {
   ]
   const newMessage = buildGoogleGenAIPrompt(messages);
   newMessage['contents'][0].parts[0].text = history[0].parts +'\n'+  newMessage['contents'][0].parts[0].text 
-  console.log(newMessage)
   const result = await geminiStream.generateContentStream(newMessage);
   // Convert the response into a friendly text-stream
   const stream = GoogleGenerativeAIStream(result);

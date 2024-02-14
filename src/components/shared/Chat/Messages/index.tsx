@@ -15,27 +15,6 @@ export const Messages = (props: { agent: string }) => {
   
   const { messages, input, handleInputChange, handleSubmit,isLoading } = useChat();
   
- /* 
- const appendCallback = useCallback(
-    async () => {
-      
-      const id = uniqueId()
-      await append({
-        id: id,
-        content: props.agent,
-        role: 'user'
-      });
-    },
-    [append, props.agent]
-  );
-
-  useEffect(() => {
-    const firstContext = async () => {
-      await appendCallback();
-    };
-    firstContext();
-  }, [appendCallback]);
-  */
  const clientClass ={
      backgroundColor: '#4f56ff',
      alignSelf: 'flex-end',
