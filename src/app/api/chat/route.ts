@@ -23,12 +23,25 @@ export async function POST(req: Request) {
  
   
   const geminiStream = await genAI
-    .getGenerativeModel({ model: 'gemini-pro' })
-    .generateContentStream(buildGoogleGenAIPrompt(messages));
- 
+    .getGenerativeModel({ model: 'gemini-pro' });
+  const history = [
+    {
+      role: "user",
+      parts: "quiero que todo lo que me responsa sea haciendote pasar por una tienda virutual futurista que vende lentes de realidad virtual, comencemos:",
+    },
+  ]
+  const newMessage = buildGoogleGenAIPrompt(messages);
+  newMessage['contents'][0].parts[0].text = history[0].parts +'\n'+  newMessage['contents'][0].parts[0].text 
+  console.log(newMessage)
+  const result = await geminiStream.generateContentStream(newMessage);
   // Convert the response into a friendly text-stream
-  const stream = GoogleGenerativeAIStream(geminiStream);
+  const stream = GoogleGenerativeAIStream(result);
  
   // Respond with the stream
   return new StreamingTextResponse(stream);
+
+ 
+
+ 
+
 }

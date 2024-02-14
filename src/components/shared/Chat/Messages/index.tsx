@@ -13,9 +13,10 @@ const uniqueId = () => {
 
 export const Messages = (props: { agent: string }) => {
   
-  const { messages, input, handleInputChange, handleSubmit,append,isLoading } = useChat();
+  const { messages, input, handleInputChange, handleSubmit,isLoading } = useChat();
   
-  const appendCallback = useCallback(
+ /* 
+ const appendCallback = useCallback(
     async () => {
       
       const id = uniqueId()
@@ -34,6 +35,7 @@ export const Messages = (props: { agent: string }) => {
     };
     firstContext();
   }, [appendCallback]);
+  */
  const clientClass ={
      backgroundColor: '#4f56ff',
      alignSelf: 'flex-end',
@@ -45,7 +47,7 @@ export const Messages = (props: { agent: string }) => {
     <main className={styles.chat}>
       <section className={styles.chat_section}>
         {messages
-        .filter((val,index)=>index>=2)
+        //.filter((val,index)=>index>=2)
         .map(m =>{
           const role = m.role === 'user' ? 'User ' : 'Assistente ';
           const classMess = m.role === 'user'?clientClass:aiClass;
