@@ -2,13 +2,13 @@ import Link from "next/link"
 import styles from './Header.module.css'
 import Login from "./Login"
 import { ShoppingCart } from "./ShoppingCart"
-import { validateAccessToken } from "@/app/utils/validateToken";
 import Logout from "./Logout";
+import validateUser from "@/supabase/validateUser"
 
  const Header = async () => {
   
-  const props =  await validateAccessToken();
-  const isLogged = props? props.logged: null;
+  const isLogged =  await validateUser();
+ 
     return(
         <header>
         <nav className={styles.nav}>

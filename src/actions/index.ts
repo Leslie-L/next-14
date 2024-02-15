@@ -1,46 +1,65 @@
-"use server"
+'use server'
 
-import createUserEmail from "@/firebase/createUser"
-import signInUserEmail from "@/firebase/login";
-import logOut from "@/firebase/logout";
-
+import { revalidatePath } from 'next/cache'
 import { cookies } from 'next/headers'
-import { redirect } from "next/navigation";
+import { redirect } from 'next/navigation'
 
+import { createClient } from '../supabase/server'
 
-export const  handleCreateUser= async (formData:FormData)=>{
-    const form = Object.fromEntries(formData)
-    const session = await createUserEmail(form);
-    const cookiesStore = cookies()
+export async function login(formData: FormData) {
+  const cookieStore = cookies()
+  const supabase = createClient(cookieStore)
 
-    if(session){
-        cookiesStore.set("accessToken",session.token, {
-            path: "/",
-            expires: new Date(session.date),
-            httpOnly: true,
-            sameSite: "strict"
-          })
-          redirect('/store')
-    }
-    
-    
-}
-export const handleLogin = async (formData: FormData) => {
-    const formDataObject = Object.fromEntries(formData)
-    const session= await signInUserEmail(formDataObject)
-    const cookiesStore = cookies()
-    if(session){
-        cookiesStore.set("accessToken",session.token, {
-            path: "/",
-            expires: new Date(session.date),
-            httpOnly: true,
-            sameSite: "strict"
-          })
-          redirect('/store')
-    }
+  // type-casting here for convenience
+  // in practice, you should validate your inputs
+  const data = {
+    email: formData.get('email') as string,
+    password: formData.get('password') as string,
   }
-export const handleLogOut =  async()=>{
-    await logOut();
-    const cookiesStore = cookies()
-    cookiesStore.delete("accessToken")
+
+  const { error } = await supabase.auth.signInWithPassword(data)
+
+  if (error) {
+    redirect('/error')
+  }
+
+  revalidatePath('/', 'layout')
+  redirect('/store')
+}
+
+export async function signup(formData: FormData) {
+  const cookieStore = cookies()
+  const supabase = createClient(cookieStore)
+
+  // type-casting here for convenience
+  // in practice, you should validate your inputs
+  const data = {
+    email: formData.get('email') as string,
+    password: formData.get('password') as string,
+  }
+
+  const { error } = await supabase.auth.signUp(data)
+
+  if (error) {
+    redirect('/error')
+  }
+
+  revalidatePath('/', 'layout')
+  redirect('/store')
+}
+
+export async function logout() {
+  const cookieStore = cookies()
+  const supabase = createClient(cookieStore)
+
+
+
+  const { error } = await supabase.auth.signOut()
+
+  if (error) {
+    redirect('/error')
+  }
+
+  revalidatePath('/', 'layout')
+  redirect('/store')
 }

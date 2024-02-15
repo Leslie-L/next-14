@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import styles from "./NewAccountForm.module.css";
-import { handleCreateUser } from "@/actions";
+import { signup } from "@/actions";
 
 
 export const NewAccountForm = () => {
@@ -12,8 +12,10 @@ export const NewAccountForm = () => {
   const handleSubmit = async (event:any) => {
     event.preventDefault();
     const formData = new FormData(event.target);
-    await handleCreateUser(formData)
+    await signup(formData)
   }
+
+
 
   return (
     <div className={styles.NewAccountForm}  >
