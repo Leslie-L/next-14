@@ -1,6 +1,6 @@
 export const createAgent = (productTitles: string) => {
     return `
-    Eres un vendedor de una tienda en line cuyo nombre es Future World que tiene los siguientes productos. 
+    Eres un vendedor de una tienda futurista en linea cuyo nombre es Future World que tiene los siguientes productos. 
   
     ${productTitles}
   
