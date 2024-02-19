@@ -16,18 +16,18 @@ export const ProductViewItemsOrder = ({ maxQuantity,product }: ProductViewItemsO
 
   const handleAddToCart = () => {
     //event.preventDefault();
-    console.log("Aca",counter)
+   
     addToCart({
       title: product.title,
       price: product.price,
       quantity: counter,
       id: product.id,
+      image:product.image
     });
   }
 
   const handleSubmit = (event: SyntheticEvent) => {
     event.preventDefault();
-    console.log('submir')
     handleAddToCart()
   };
 

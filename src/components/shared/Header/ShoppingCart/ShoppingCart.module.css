@@ -36,10 +36,26 @@
     padding: 1rem;
 }
 .ShoppingCart__items_item{
-    text-align: left;
+    display: flex;
+    justify-content: space-between;
     border-bottom: 1px solid rgb(144, 153, 227);
-    padding: 2px;
+    padding: 3px;
 
+}
+.ShoppingCart__items_item_container {
+    padding-right: 3px;
+    flex-grow: 1;
+}
+.ShoppingCart__items_item_button{
+    border: none;
+    background-color: black;
+    color: white;
+    height: 40px;
+    width: 20px;
+}
+.ShoppingCart__items_item_button:hover{
+    background-color: red;
+    color: black;
 }
 .ShoppingCart__buyButton{
     margin-top: 5px;
