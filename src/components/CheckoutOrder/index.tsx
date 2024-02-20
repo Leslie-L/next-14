@@ -2,11 +2,28 @@
 import { useShoppingCart } from "@/provider/useShoppingCart";
 import Image from "next/image";
 import styles from './CheckoutOrder.module.css'
+import { useState } from "react";
+import { FcSimCardChip } from "react-icons/fc";
 
 export default function CheckoutOrder() {
     const { cart } = useShoppingCart();
     const totalItems = cart.reduce((prev,current)=>(current.quantity)+prev,0)
     const totalPrice  = cart.reduce((prev,current)=>(current.price*current.quantity)+prev,0)
+    
+    const [cardNumber, setCardNumber]=useState('')
+    const [cardName, setCardName]=useState('')
+    const [cardMonth, setCardMonth]=useState('')
+    const [cardCVC, setCardCVC]=useState('')
+    const [front,setFront]=useState(true)
+    const handleDigits= (e:React.ChangeEvent<HTMLInputElement>)=>{
+        setFront(true)
+        // Filtrar solo números
+        const numeroSinLetras = e.currentTarget.value.replace(/\D/g, '');
+        // Añadir espacios cada 4 dígitos
+        const numeroConEspacios = numeroSinLetras.replace(/(\d{4})/g, '$1 ').trim();
+        setCardNumber(numeroConEspacios)
+        
+    }
     return(
         <section>
             <h1 className={styles.title}>CheckOut</h1>
@@ -50,6 +67,96 @@ export default function CheckoutOrder() {
                     <span>Total a pagar:</span>
                     <span>${totalPrice}</span>
                 </div>
+            </article>
+            <article className={styles.info_form}>
+                <h2>Informacion de Pago</h2>
+                <p>Esta es un fakeStore, ninguna informacion personal sera guardada. Utilice datos falsos.</p>
+                <form  className={styles.info}action="">
+                    <label htmlFor="">
+                        Nombre:
+                        <input className={styles.input} type="text" name="" id="" />
+                    </label>
+                    <label htmlFor="">
+                        Apellido:
+                        <input className={styles.input} type="text" name="" id="" />
+                    </label>
+                    <label htmlFor="">
+                        Correo:
+                        <input className={styles.input} type="email" name="" id="" />
+                    </label>
+                    <label htmlFor="">
+                        Telefono:
+                        <input className={styles.input} type="tel" name="" id="" />
+                    </label>
+                    <label htmlFor="">
+                        
+                        <textarea className={styles.input} placeholder="Ingrese su direccion" style={{border:'1px solid #ff4980'}} name="" id="" cols="30" rows="10"></textarea>
+                    </label>
+                </form>
+                <h3>Informacion de la tarjeta</h3>
+                {front &&
+                    <div className={styles.card}>
+                        <span className={styles.card_title}>Credit Card</span>
+                    
+                        <FcSimCardChip className={styles.card_chip} />
+                        
+                        <span className={styles.card_number} >{cardNumber.length===0?'XXXX XXXX XXXX XXXX':cardNumber}</span>
+                        <p className={styles.card_month}>Valid THRU <span>{cardMonth.length===0?'00/00':cardMonth}</span></p>
+                        <p className={styles.card_name}>{cardName.length===0?'NOMBRE EN LA TARJETA':cardName}</p>
+                    </div>
+                }
+                {
+                    !front &&
+                    <div className={styles.card}>
+                        <div className={styles.card_strip}></div>
+                        <div className={styles.card_container} >
+                            <div className={styles.card_signature}></div>
+                            <p ><span className={styles.card_cvc}>{cardCVC.length===0?' ':cardCVC}</span>CVC</p>
+                        </div>
+                    </div>
+                } 
+                <form action="" className={styles.card_form}>
+                    <label htmlFor="">
+                        Numero de la tarjeta
+                        <input type="text" 
+                        className={styles.input}
+                        onChange={handleDigits}
+                        value={cardNumber}
+                        placeholder="0000 0000 0000 0000" name="" id="" maxLength={19}/>
+                    </label>
+                    <label htmlFor="">
+                        Nombre en la tarjeta
+                        <input type="text" 
+                        className={styles.input}
+                        onChange={(e)=>{
+                            setFront(true)
+                            setCardName(e.currentTarget.value.toLocaleUpperCase())}}
+                        value={cardName}
+                         />
+                    </label>
+                    <label htmlFor="">
+                        Mes/Año
+                        <input type="month" 
+                        className={styles.input}
+                        onChange={(e)=>{
+                            setFront(true)
+                            setCardMonth(e.currentTarget.value)}}
+                        value={cardMonth}
+                         />
+                    </label>
+                    <label htmlFor="">
+                        CVC
+                        <input type="text" 
+                        className={styles.input}
+                        onChange={(e)=>{
+                            setFront(false)
+                            setCardCVC(e.currentTarget.value)
+                        }}
+                        value={cardCVC}
+                        maxLength={4}
+                         />
+                    </label>
+                </form>
             </article>
         </section>
     )
