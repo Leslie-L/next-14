@@ -19,14 +19,22 @@ import validateUser from "@/supabase/validateUser"
             <Link href="/store">
               <li className={styles.item}>Store</li>
             </Link>
+            
           </ul>
           <div className={styles.Header__user}>
+            {
+                isLogged&&
+                <Link href="/orders" className={styles.item}>
+                  My Orders
+                </Link>
+            }
             <ShoppingCart />
             {
               isLogged?
               <Logout/>:
               <Login/>
             }
+            
             
             
         </div>

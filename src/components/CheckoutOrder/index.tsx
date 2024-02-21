@@ -12,8 +12,7 @@ export default function CheckoutOrder({ user }: { user: User | null }) {
     const totalItems = cart.reduce((prev,current)=>(current.quantity)+prev,0)
     const totalPrice  = cart.reduce((prev,current)=>(current.price*current.quantity)+prev,0)
     const redirect = useRouter()
-    if(cart.length===0)
-        redirect.push('/store')
+    
     const supabase = createClientComponentClient();
     const uuid =  user?.id
     const [cardNumber, setCardNumber]=useState('')
@@ -38,10 +37,14 @@ export default function CheckoutOrder({ user }: { user: User | null }) {
         const {  error, status } = await supabase
         .from('Compras')
         .insert(data)
-        if(status===201)
+        if(status===201){
             deleteCart();
-        console.log(error)
+            redirect.push('/orders')
+        }
+        //console.log(error)
     }
+    if(cart.length===0)
+        redirect.push('/store')
     return(
         <section>
             <h1 className={styles.title}>CheckOut</h1>
