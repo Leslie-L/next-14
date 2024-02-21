@@ -6,7 +6,7 @@ import { useState } from "react";
 import { FcSimCardChip } from "react-icons/fc";
 import { User, createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 export default function CheckoutOrder({ user }: { user: User | null }) {
-    const { cart } = useShoppingCart();
+    const { cart,addOne,substractOne,deleteCart } = useShoppingCart();
     const totalItems = cart.reduce((prev,current)=>(current.quantity)+prev,0)
     const totalPrice  = cart.reduce((prev,current)=>(current.price*current.quantity)+prev,0)
     
@@ -29,12 +29,14 @@ export default function CheckoutOrder({ user }: { user: User | null }) {
     const handleBuy=async ()=>{
         
         const date = new Date().toISOString()
-        const data = { id: uuid, productos: cart, created_at:date}
+        const data = { idUser: uuid, productos: cart, created_at:date}
         
         const {  error, status } = await supabase
         .from('Compras')
         .insert(data)
-        
+        if(status===201)
+            deleteCart();
+        console.log(error)
     }
     return(
         <section>
@@ -102,7 +104,9 @@ export default function CheckoutOrder({ user }: { user: User | null }) {
                     </label>
                     <label htmlFor="">
                         
-                        <textarea className={styles.input} placeholder="Ingrese su direccion" style={{border:'1px solid #ff4980'}} name="" id="" cols="30" rows="10"></textarea>
+                        <textarea className={styles.input} 
+                        placeholder="Ingrese su direccion" 
+                        style={{border:'1px solid #ff4980'}} name="" id="" cols={30} rows={10}></textarea>
                     </label>
                 </form>
                 <h3>Informacion de la tarjeta</h3>
