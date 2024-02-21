@@ -4,12 +4,14 @@ import Image from "next/image";
 import styles from './CheckoutOrder.module.css'
 import { useState } from "react";
 import { FcSimCardChip } from "react-icons/fc";
-
-export default function CheckoutOrder() {
+import { User, createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+export default function CheckoutOrder({ user }: { user: User | null }) {
     const { cart } = useShoppingCart();
     const totalItems = cart.reduce((prev,current)=>(current.quantity)+prev,0)
     const totalPrice  = cart.reduce((prev,current)=>(current.price*current.quantity)+prev,0)
     
+    const supabase = createClientComponentClient();
+    const uuid =  user?.id
     const [cardNumber, setCardNumber]=useState('')
     const [cardName, setCardName]=useState('')
     const [cardMonth, setCardMonth]=useState('')
@@ -22,6 +24,16 @@ export default function CheckoutOrder() {
         // Añadir espacios cada 4 dígitos
         const numeroConEspacios = numeroSinLetras.replace(/(\d{4})/g, '$1 ').trim();
         setCardNumber(numeroConEspacios)
+        
+    }
+    const handleBuy=async ()=>{
+        
+        const date = new Date().toISOString()
+        const data = { id: uuid, productos: cart, created_at:date}
+        
+        const {  error, status } = await supabase
+        .from('Compras')
+        .insert(data)
         
     }
     return(
@@ -157,6 +169,11 @@ export default function CheckoutOrder() {
                          />
                     </label>
                 </form>
+                <button 
+                    onClick={handleBuy}
+                    className={styles.buy}>
+                    Finalizar Compra
+                </button>
             </article>
         </section>
     )
