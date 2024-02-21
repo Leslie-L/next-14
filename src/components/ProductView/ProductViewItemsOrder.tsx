@@ -1,8 +1,9 @@
 "use client";
-import { SyntheticEvent, useState } from "react";
+import { SyntheticEvent, useEffect, useState } from "react";
 
 import styles from "./ProductViewItemsOrder.module.css";
 import { useShoppingCart } from "@/provider/useShoppingCart";
+import Notification from "./Notification";
 
 
 interface ProductViewItemsOrderProps {
@@ -13,10 +14,16 @@ interface ProductViewItemsOrderProps {
 export const ProductViewItemsOrder = ({ maxQuantity,product }: ProductViewItemsOrderProps) => {
   const [counter, setCounter] = useState(1);
   const { addToCart } = useShoppingCart();
+  const [notification,setNotification]=useState(false)
 
+  useEffect(()=>{
+    setTimeout(()=>{
+      setNotification(false)
+    },2000)
+  },[notification])
   const handleAddToCart = () => {
     //event.preventDefault();
-   
+    setNotification(true)
     addToCart({
       title: product.title,
       price: product.price,
@@ -62,6 +69,10 @@ export const ProductViewItemsOrder = ({ maxQuantity,product }: ProductViewItemsO
           <span>🛒 Add to cart</span>
         </button>
       </form>
+      {
+        notification &&
+          <Notification/>
+      }
     </div>
   )
 };

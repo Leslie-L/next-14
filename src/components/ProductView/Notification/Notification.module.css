@@ -1,0 +1,15 @@
+.notification{
+    position: fixed;
+    top: 60px;
+    right: 0;
+    bottom: 0;
+    left: 45%;
+    width: 200px;
+    height: 35px;
+    background: rgb(62, 230, 62);
+    color: black;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    border-radius: 5px;
+}
