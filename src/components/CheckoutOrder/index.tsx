@@ -5,11 +5,15 @@ import styles from './CheckoutOrder.module.css'
 import { useState } from "react";
 import { FcSimCardChip } from "react-icons/fc";
 import { User, createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { useRouter } from "next/navigation";
+
 export default function CheckoutOrder({ user }: { user: User | null }) {
     const { cart,addOne,substractOne,deleteCart } = useShoppingCart();
     const totalItems = cart.reduce((prev,current)=>(current.quantity)+prev,0)
     const totalPrice  = cart.reduce((prev,current)=>(current.price*current.quantity)+prev,0)
-    
+    const redirect = useRouter()
+    if(cart.length===0)
+        redirect.push('/store')
     const supabase = createClientComponentClient();
     const uuid =  user?.id
     const [cardNumber, setCardNumber]=useState('')
