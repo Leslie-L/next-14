@@ -1,6 +1,6 @@
 import { env } from "@/config/env";
 import { shopifyUrls } from "./urls";
-
+export const dynamic = 'force-dynamic';
 export const getProducts =async (id?:string):Promise<ProductType[]>=>{
     try {
       const src =  await fetch(shopifyUrls.products.all)
