@@ -1,6 +1,7 @@
 import styles from './MainProducts.module.css'
 import Item from './Item';
 import { getProducts } from '@/services/shopify';
+export const dynamic = 'force-dynamic';
 
 
 const MainProducts= async ()=> {
