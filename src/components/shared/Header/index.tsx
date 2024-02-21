@@ -25,7 +25,7 @@ import validateUser from "@/supabase/validateUser"
             {
                 isLogged&&
                 <Link href="/orders" className={styles.item}>
-                  My Orders
+                  Orders
                 </Link>
             }
             <ShoppingCart />

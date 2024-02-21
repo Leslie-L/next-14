@@ -15,9 +15,11 @@
 .item{
     color: white;
     font-size: medium;
-    padding: 10px;
-    font-size: 1.2rem;
+    padding: 8px;
+    font-size: 1rem;
     border-radius: 2px;
+    border:none;
+    margin-right: 2px;
 }
 .item:hover{
     background-color: #4f56ff;

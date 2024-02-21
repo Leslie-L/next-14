@@ -5,12 +5,17 @@ import { useRouter } from "next/navigation";
 import { IoBagHandle } from "react-icons/io5";
 import { IoIosArrowForward } from "react-icons/io";
 import styles from './Orders.module.css'
+import Modal from './Modal';
 type Order = {
     created_at: string
     productos: [] | CartItem[]
 }
+
 export default function Orders({ user }: { user: User | null }) {
     const [orders, setOrders] = useState<Order[]>([]);
+    const [order,setOrder]=useState<Order>();
+    const[controlModal,setControlModal]=useState(false);
+
     const redirect = useRouter()
     const supabase = createClientComponentClient();
     const uuid =  user?.id
@@ -57,7 +62,12 @@ export default function Orders({ user }: { user: User | null }) {
                                     <span>Cantidad de productos:{cantItems}</span>
                                     <span>Total: ${total}</span>
                                 </div>
-                                <button className={styles.item_button}>
+                                <button 
+                                    onClick={()=>{
+                                        setOrder(item)
+                                        setControlModal(true)
+                                    }}
+                                    className={styles.item_button}>
                                     <IoIosArrowForward />
                                 </button>
                             </div>
@@ -65,6 +75,10 @@ export default function Orders({ user }: { user: User | null }) {
                     })
                 }
             </div>
+            {
+                controlModal &&
+                <Modal order={order} close={setControlModal}/>
+            }
         </section>
     )
 }
