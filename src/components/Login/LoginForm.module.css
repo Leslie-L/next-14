@@ -46,4 +46,32 @@
     cursor: pointer;
     border-radius: 1.5rem;
 }
-      
+.NewAccountForm__form > input[name="submit"]:hover{
+    background: #ff4980;  
+}
+.division{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.division_line{
+    width: 48%;
+    height: 1px;
+    border-bottom: 1px solid #ff4980;
+}
+.division_button{
+    margin-top: 20px;
+    width: 100%;
+    border: 1px solid #ff4980;
+    background: transparent;
+    color: white;
+    padding: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 1.5rem;
+}
+.division_button:hover{
+    background-color: #ff4980;
+}
